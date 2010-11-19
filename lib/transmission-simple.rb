@@ -6,6 +6,6 @@ require 'json'
 require 'ostruct'
 require 'active_support/inflector'
 
-module Transmission
-  # Your code goes here...
-end
+require 'transmission-simple/error'
+require 'transmission-simple/torrent'
+require 'transmission-simple/api'

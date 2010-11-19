@@ -18,5 +18,5 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   
   s.add_dependency 'json'
-  s.add_dependency 'active_support'
+  s.add_dependency 'activesupport'
 end
