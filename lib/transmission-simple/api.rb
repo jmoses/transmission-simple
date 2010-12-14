@@ -8,7 +8,9 @@ module TransmissionSimple
     end
     
     def send_request(request_name, options )
-      http = Net::HTTP.new(endpoint.host, endpoint.port) 
+      http = Net::HTTP.new(endpoint.host, endpoint.port)
+      http.use_ssl = ( endpoint.scheme == 'https' )
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       # http.set_debug_output STDOUT
       http.start do |http|
         request = Net::HTTP::Post.new(endpoint.path, {'X-Transmission-Session-Id' => (session or ''), 'Content-Type' => 'application/json' })
@@ -36,7 +38,7 @@ module TransmissionSimple
             {}
           end
         else
-          raise Transmission::Error.new( json_results['result'] )
+          raise TransmissionSimple::Error.new( json_results['result'] )
         end
       end
     end
